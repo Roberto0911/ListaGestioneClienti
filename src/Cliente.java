@@ -1,18 +1,19 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Cliente
 {
-	private int codiceIdentificativo;
+	private String codiceIdentificativo;
 	private String nomeAzienda;
 	private String cittaSede;
-	private LocalDateTime data;
+	private LocalDate data;
 	
-	public Cliente (int codiceIdentificativo, String nomeAzienda, String cittaSede, LocalDateTime data)
+	public Cliente (String codiceIdentificativo, String nomeAzienda, String cittaSede, LocalDate data1)
 	{
 		setCodiceIdentificativo(codiceIdentificativo);
 		setNomeAzienda(nomeAzienda);
 		setCittaSede(cittaSede);
-		setData(data);
+		setData(data1);
 	}
 	public Cliente (Cliente c)
 	{
@@ -21,13 +22,13 @@ public class Cliente
 		setCittaSede(c.getCittaSede());
 		setData(c.getData());
 	}
-	public int getCodiceIdentificativo() 
+	public String getCodiceIdentificativo() 
 	{
 		return codiceIdentificativo;
 	}
-	public void setCodiceIdentificativo(int codiceIdentificativo) 
+	public void setCodiceIdentificativo(String codiceIdentificativo2) 
 	{
-		this.codiceIdentificativo = codiceIdentificativo;
+		this.codiceIdentificativo = codiceIdentificativo2;
 	}
 	public String getNomeAzienda() 
 	{
@@ -45,19 +46,19 @@ public class Cliente
 	{
 		this.cittaSede = cittaSede;
 	}
-	public LocalDateTime getData() 
+	public LocalDate getData() 
 	{
 
 		return data;
 	}
-	public void setData(LocalDateTime data) 
+	public void setData(LocalDate data1) 
 	{
-		this.data = data;
+		this.data = data1;
 	}
 	public String toString ()
 	{
 		String risultato = null;
-		risultato+= getCodiceIdentificativo() + "; "+ getNomeAzienda() + "; " + getCittaSede() + "; " + getData() + ".";
+		risultato+= getCodiceIdentificativo() + "; "+ getNomeAzienda() + "; " + getCittaSede() + "; " + getData();
 		return risultato;
 	}
 	

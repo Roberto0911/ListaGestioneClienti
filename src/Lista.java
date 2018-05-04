@@ -1,5 +1,7 @@
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Lista implements Serializable
@@ -39,7 +41,7 @@ public class Lista implements Serializable
 		}
 		return p;
 	}
-	public void inseriscInTesta (Cliente azienda)
+	private void inseriscInTesta (Cliente azienda)
 	{
 		Nodo p = creaNodo(azienda, head);
 		head = p;
@@ -57,64 +59,18 @@ public class Lista implements Serializable
 		p.setLink(pn);
 		elementi++;
 	}
-	public void inserisciInPosizione (Cliente azienda, int posizione) throws ListaException 
-	{
-		if (posizione<=1)
-		{
-			inseriscInTesta(azienda);
-			return;
-		}
-		if (posizione>elementi)
-		{
-			inserisciInCoda(azienda);
-			return;
-		}
-		Nodo pn = creaNodo(azienda, getLinkPosizione(posizione));
-		Nodo precedente = getLinkPosizione(posizione-1);
-		precedente.setLink(pn);
-		elementi++;
-	}
-	public void eliminaInTesta () throws ListaException
+	/*public void eliminaCodice (String codice) throws ListaException
 	{
 		if (elementi == 0)
 			throw new ListaException("Lista vuolta");
-		head = head.getLink();
-		elementi--;
-	}
-	public void eliminaInCoda() throws ListaException
-	{
-		if (elementi == 0)
-			throw new ListaException("Lista vuolta");
-		if (elementi == 1)
+		if (codice == null)
+			throw new ListaException("Codice non valido");
+		Nodo p;
+		while (p.getLink()!=null) 
 		{
-			eliminaInTesta();
-			return;
+			
 		}
-		Nodo p = getLinkPosizione(elementi-1);
-		p.setLink(null);			
-		elementi--;
-	}
-	public void eliminaInPosizione (int posizione) throws ListaException
-	{
-		if (elementi == 0)
-			throw new ListaException("Lista vuolta");
-		if (posizione <= 0 || posizione>elementi)
-			throw new ListaException("Posizione non valida");
-		if (posizione == 1)
-		{
-			eliminaInTesta();
-			return;
-		}
-		if (posizione == elementi)
-		{
-			eliminaInCoda();
-			return;
-		}
-		Nodo p = getLinkPosizione(posizione);
-		Nodo precedente = getLinkPosizione(posizione-1);
-		precedente.setLink(p.getLink());
-		elementi--; 
-	}
+	}*/
 	public String visita (int posizione) throws ListaException
 	{
 		if (elementi == 0)
@@ -159,4 +115,14 @@ public class Lista implements Serializable
 		}
 		file.closeFile();
 	}
+	public void salvaLista(String nomeFile) throws IOException
+	{
+		FileOutputStream file = new FileOutputStream(nomeFile);
+		ObjectOutputStream writer = new ObjectOutputStream(file);
+		writer.writeObject(this);
+		writer.flush();
+		file.close();
+	}
+	
+	
 }
