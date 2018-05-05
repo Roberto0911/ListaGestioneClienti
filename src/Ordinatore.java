@@ -59,7 +59,7 @@ public class Ordinatore
 	{
 		Cliente[]arrayCopia=new Cliente[array.length];
 		for (int i = 0; i < arrayCopia.length; i++) 
-			arrayCopia[i]= array[i];
+			arrayCopia[i] = array[i];
 		return arrayCopia;
 	}
 	public static int[] selectionSortDecrescente(int[] array)
@@ -197,6 +197,21 @@ public class Ordinatore
 		} while (scambioAvvenuto==true);
 		return arrayCopia;
 	}
+	
+	public static Cliente[] selectionSortCrescente(Cliente[] array)
+	{
+		Cliente[] arrayCopia=copiaArray(array);
+		for (int i = 0; i < arrayCopia.length-1; i++) 
+		{
+			for (int j = i+1; j < arrayCopia.length; j++) 
+			{
+				if (arrayCopia[i].getNomeAzienda().compareTo(arrayCopia[j].getNomeAzienda())>0)
+					scambia(arrayCopia, i, j);
+			}
+		}
+		return arrayCopia;
+	}
+	
 	
 	
 

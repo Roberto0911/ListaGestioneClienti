@@ -59,16 +59,23 @@ public class Lista implements Serializable
 		p.setLink(pn);
 		elementi++;
 	}
-	/*public void eliminaCodice (String codice) throws ListaException
+	/*public void eliminaCliente (String codice) throws ListaException
 	{
 		if (elementi == 0)
 			throw new ListaException("Lista vuolta");
 		if (codice == null)
 			throw new ListaException("Codice non valido");
-		Nodo p;
-		while (p.getLink()!=null) 
+		Nodo p = head;
+		while (p!=null) 
 		{
-			
+			if (p.getInfo().getCodiceIdentificativo().compareTo(codice)==0)
+			{
+				Nodo precedente = getLinkPosizione();
+				precedente.setLink(p.getLink());
+				elementi--; 
+			}
+				
+				
 		}
 	}*/
 	public String visita (int posizione) throws ListaException
@@ -123,6 +130,24 @@ public class Lista implements Serializable
 		writer.flush();
 		file.close();
 	}
+	public String[] getOrdineAlfabetico () 
+	{
+		String[] elencoClienti = new String [elementi];
+		int j=0;
+		Nodo p = head;
+		for (int i = 0; i < getElementi()-1; i++) 
+		{
+			if (p!=null)
+			{
+				
+					elencoClienti[j] = p.getInfo().getNomeAzienda();
+					j++;
+					p = p.getLink();
+			}
+		}
+		elencoClienti = Ordinatore.selectionSortDecrescente(elencoClienti);
+		return elencoClienti;
+	}
+	}
 	
 	
-}
