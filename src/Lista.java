@@ -59,25 +59,46 @@ public class Lista implements Serializable
 		p.setLink(pn);
 		elementi++;
 	}
-	/*public void eliminaCliente (String codice) throws ListaException
+	public void eliminaCliente (String codice, String nomeFile) throws ListaException, NuovaException, IOException, FileException
 	{
 		if (elementi == 0)
 			throw new ListaException("Lista vuolta");
 		if (codice == null)
 			throw new ListaException("Codice non valido");
 		Nodo p = head;
-		while (p!=null) 
+		int posizione = 0;
+		while(p!=null)
 		{
-			if (p.getInfo().getCodiceIdentificativo().compareTo(codice)==0)
+			posizione++;
+						
+			if(p.getInfo().getCodiceIdentificativo()==codice)
 			{
-				Nodo precedente = getLinkPosizione();
-				precedente.setLink(p.getLink());
-				elementi--; 
-			}
-				
-				
+				TextFile file=new TextFile(nomeFile,'W');
+				String CSV;
+				Cliente cliente;
+				cliente=getCliente(codice);
+				CSV = cliente.getCodiceIdentificativo() + ";"+ cliente.getNomeAzienda() + ";" + cliente.getCittaSede() + ";" + cliente.getData();
+				file.toFile(CSV);
+				file.closeFile();
+						if (posizione==1) 
+						{
+							head=getLinkPosizione(posizione+1);
+							elementi--;
+							return;
+						}
+						p=getLinkPosizione(posizione);
+						Nodo precedente=getLinkPosizione(posizione-1);
+						precedente.setLink(p.getLink());
+						elementi--;
+						return;
+			}		
+			
+			p=p.getLink();
 		}
-	}*/
+		throw new NuovaException("Nessun cliente corrisponte al codice inserito");
+	}
+		
+	
 	public String visita (int posizione) throws ListaException
 	{
 		if (elementi == 0)
@@ -87,7 +108,20 @@ public class Lista implements Serializable
 		Nodo c = getLinkPosizione(posizione);
 		return c.getInfo().toString();
 	}
-	public Cliente getCliente (int posizione) throws ListaException
+	public Cliente getCliente (String codice) throws ListaException, NuovaException
+	{
+		if(elementi==0)
+			throw new ListaException("Nessun cliente inserito");
+		Nodo p=head;
+		while(p!=null)
+		{
+			if(p.getInfo().getCodiceIdentificativo()==codice)
+				return p.getInfo();
+			p=p.getLink();
+		}
+		throw new NuovaException("Nessun cliente corrisponde al codice inserito");
+	}
+	private Cliente getClientePosizione (int posizione) throws ListaException  
 	{
 		if (elementi == 0)
 			throw new ListaException("Lista vuolta");
@@ -116,7 +150,7 @@ public class Lista implements Serializable
 		Cliente azienda;
 		for (int i = 1; i <= getElementi(); i++)
 		{
-			azienda = getCliente(i);
+			azienda = getClientePosizione(i);
 			personaCSV =azienda.getCodiceIdentificativo() + "; "+ azienda.getNomeAzienda() + "; " + azienda.getCittaSede() + "; " + azienda.getData() + ".";
 			file.toFile(personaCSV);
 		}
@@ -145,9 +179,13 @@ public class Lista implements Serializable
 					p = p.getLink();
 			}
 		}
-		elencoClienti = Ordinatore.selectionSortDecrescente(elencoClienti);
+		elencoClienti = Ordinatore.selectionSortCrescente(elencoClienti);
 		return elencoClienti;
 	}
-	}
+	
+	public String 
+	
+	
+}
 	
 	
