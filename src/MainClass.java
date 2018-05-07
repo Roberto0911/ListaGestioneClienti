@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 
 
@@ -10,9 +11,9 @@ public class MainClass
 		LocalDate data2 = LocalDate.of(2000, 6, 19);
 		LocalDate data3 = LocalDate.of(1999, 10, 26);
 		
-		Cliente c1 =  new Cliente("aac58t", "Recom", "roma", data1);
-		Cliente c2 =  new Cliente("trdhe565", "Alegay", "boario", data3);
-		Cliente c3 =  new Cliente("vdfjk", "Lazzarini", "Piamborno", data2);
+		Cliente c1 =  new Cliente("5", "Recom", "roma", data1);
+		Cliente c2 =  new Cliente("6", "Alegay", "boario", data3);
+		Cliente c3 =  new Cliente("5", "Lazzarini", "Piamborno", data2);
 		
 		Lista l1 = new Lista();
 		try 
@@ -25,7 +26,7 @@ public class MainClass
 		{
 			e.toString();
 		}
-		System.out.println(l1.getOrdineAlfabetico());
+		
 	}
 	
 }

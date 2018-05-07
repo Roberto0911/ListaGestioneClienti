@@ -57,7 +57,7 @@ public class Cliente
 	}
 	public String toString ()
 	{
-		String risultato = null;
+		String risultato = "";
 		risultato+= getCodiceIdentificativo() + "; "+ getNomeAzienda() + "; " + getCittaSede() + "; " + getData();
 		return risultato;
 	}

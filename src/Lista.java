@@ -166,7 +166,7 @@ public class Lista implements Serializable
 	}
 	public String[] getOrdineAlfabetico () 
 	{
-		String[] elencoClienti = new String [elementi];
+		String[] elencoClienti = new String [elementi-1];
 		int j=0;
 		Nodo p = head;
 		for (int i = 0; i < getElementi()-1; i++) 
@@ -183,8 +183,33 @@ public class Lista implements Serializable
 		return elencoClienti;
 	}
 	
-	public String 
-	
+	public Cliente[] getClienteCitta (String cittaSede)
+	{
+		Cliente[] clienteCitta;
+		int contaCliente = 0;
+		Nodo p = head;
+		while (p != null) 
+		{
+			if (p.getInfo().getCittaSede().compareTo(cittaSede)==0)
+			{
+				contaCliente++;
+			}
+		p = p.getLink();
+		}
+		clienteCitta = new Cliente[contaCliente];
+		int j = 0;
+		while (p != null) 
+		{
+			if (p.getInfo().getCittaSede().compareTo(cittaSede)==0)
+			{
+				clienteCitta[j] = new Cliente(p.getInfo());
+				j++;
+					
+			}
+			p = p.getLink();
+		}
+		return clienteCitta;
+	}
 	
 }
 	
