@@ -1,6 +1,7 @@
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
@@ -163,6 +164,15 @@ public class Lista implements Serializable
 		writer.writeObject(this);
 		writer.flush();
 		file.close();
+	}
+	public Lista caricaLista (String nomeFile) throws IOException, ClassNotFoundException
+	{
+		FileInputStream file = new FileInputStream(nomeFile);
+		ObjectInputStream reader = new ObjectInputStream(file);
+		Lista lista;
+		lista = (Lista) reader.readObject();
+		file.close();
+		return lista;
 	}
 	public String[] getOrdineAlfabetico () 
 	{
