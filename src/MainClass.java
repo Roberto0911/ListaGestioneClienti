@@ -70,6 +70,7 @@ public class MainClass implements Serializable
 					anno = tastiera.readInt();
 					LocalDate data = LocalDate.of(anno, mese, giorno);
 					nuovoCliente.setData(data);
+					listaClienti.inserisciInCoda(nuovoCliente);
 					
 				} 
 				catch (NumberFormatException e) 
@@ -78,6 +79,9 @@ public class MainClass implements Serializable
 				} catch (IOException e) 
 				{
 					System.out.println("Impossibile leggera da tastiera");
+				} catch (ListaException e) 
+				{
+					System.out.println(e.toString());
 				}	
 				break;
 			}
