@@ -22,6 +22,13 @@ public class Cliente
 		setCittaSede(c.getCittaSede());
 		setData(c.getData());
 	}
+	public Cliente ()
+	{
+		setCodiceIdentificativo(null);
+		setNomeAzienda(null);
+		setCittaSede(null);
+		setData(null);
+	}
 	public String getCodiceIdentificativo() 
 	{
 		return codiceIdentificativo;
